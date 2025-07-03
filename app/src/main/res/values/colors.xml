@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary colors -->
+    <color name="primary">#6750A4</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#EADDFF</color>
+    <color name="on_primary_container">#21005E</color>
+
+    <!-- Secondary colors -->
+    <color name="secondary">#625B71</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#E8DEF8</color>
+    <color name="on_secondary_container">#1E192B</color>
+
+    <!-- Tertiary colors -->
+    <color name="tertiary">#7D5260</color>
+    <color name="on_tertiary">#FFFFFF</color>
+
+    <!-- Error colors -->
+    <color name="error">#B3261E</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="error_container">#F9DEDC</color>
+
+    <!-- Background/surface colors -->
+    <color name="background">#FFFBFE</color>
+    <color name="on_background">#1C1B1F</color>
+    <color name="surface">#FFFBFE</color>
+    <color name="on_surface">#1C1B1F</color>
+    <color name="surface_variant">#E7E0EC</color>
+
+    <!-- Outline colors -->
+    <color name="outline">#79747E</color>
+    <color name="outline_variant">#CAC4D0</color>
+
+
+
+
+
+
+    <color name="primary_dark">#2A1E78</color>
+    <color name="primary_light">#5F35F0</color>
+    <color name="accent">#5F35F0</color>
+    <color name="warning">#FF8B00</color>
+    <color name="success">#2E9E4F</color>
+    <color name="text_primary">#1A1A2E</color>
+    <color name="text_secondary">#4B4B5A</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+
+    <!-- Add these to your existing colors.xml -->
+    <color name="card_stroke">#1F000000</color> <!-- Semi-transparent black -->
+
+
+    <!-- Status colors (optional) -->
+    <color name="status_in_stock">#4CAF50</color>
+    <color name="status_low_stock">#FF9800</color>
+    <color name="status_out_of_stock">#F44336</color>
+
+</resources>

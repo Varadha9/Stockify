@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Info -->
+    <string name="app_name">Modern Login App</string>
+
+    <!-- Form Labels -->
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+
+    <!-- Button Texts -->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
+    <!-- Navigation Links -->
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="already_have_account">Already have an account? Login</string>
+
+    <!-- Error Messages -->
+    <string name="error_email_empty">Please enter your email address</string>
+    <string name="error_email_invalid">Please enter a valid email address</string>
+    <string name="error_password_empty">Please enter your password</string>
+    <string name="error_password_length">Password must be at least 6 characters</string>
+    <string name="error_name_empty">Please enter your full name</string>
+    <string name="error_passwords_dont_match">Passwords do not match. Please try again</string>
+
+    <!-- Accessibility Content Descriptions -->
+    <string name="content_description_logo">App Logo</string>
+    <string name="content_description_email_icon">Email Icon</string>
+    <string name="content_description_password_icon">Password Icon</string>
+
+    <string name="item_image_desc">Item image</string>
+
+
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_inventory">Inventory</string>
+    <string name="title_scan">Scan</string>
+    <string name="title_reports">Reports</string>
+    <string name="title_settings">Settings</string>
+</resources>

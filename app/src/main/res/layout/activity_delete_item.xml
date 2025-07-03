@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/delete_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Inventory Item"
+        android:textSize="26sp"
+        android:textColor="#2C3E50"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/itemToDelete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Search or enter item name"
+        android:paddingHorizontal="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="#000000"
+        android:textColorHint="#999999"
+        android:inputType="text"
+        android:elevation="2dp"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Delete"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button"
+        android:elevation="4dp" />
+
+</LinearLayout>

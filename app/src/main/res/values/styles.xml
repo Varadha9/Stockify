@@ -1,0 +1,66 @@
+<resources>
+    <!-- TextInputLayout style -->
+    <style name="Widget.V2.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/outline</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.V2.SmallComponent</item>
+    </style>
+
+    <!-- Button style -->
+    <style name="Widget.V2.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.V2.MediumComponent</item>
+    </style>
+
+    <!-- Shape styles -->
+    <style name="ShapeAppearance.V2.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <style name="ShapeAppearance.V2.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- Circular Button -->
+    <style name="CircularButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">16dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minWidth">32dp</item>
+        <item name="android:minHeight">32dp</item>
+    </style>
+
+    <!-- Bottom Navigation Theme -->
+    <style name="BottomNavigationTheme" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:textSize">12sp</item>
+        <item name="itemIconTint">@color/bottom_nav_colors</item>
+        <item name="itemTextColor">@color/bottom_nav_colors</item>
+        <item name="itemBackground">?android:attr/selectableItemBackground</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <!-- Custom Text Appearance -->
+    <style name="MyTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <!-- Material Text Appearances -->
+    <style name="MyTitleStyle" parent="TextAppearance.Material3.TitleLarge" />
+    <style name="MyBodyStyle" parent="TextAppearance.Material3.BodyLarge" />
+    <style name="MyHeadline6" parent="TextAppearance.Material3.HeadlineSmall" />
+    <style name="MyCaption" parent="TextAppearance.Material3.BodySmall" />
+    <style name="MyHeadline5" parent="TextAppearance.Material3.HeadlineMedium" />
+
+    <style name="zxing_CaptureTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

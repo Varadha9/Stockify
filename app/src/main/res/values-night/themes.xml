@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.V2" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here if needed -->
+        <!-- Most colors will automatically adapt through Material 3's theming system -->
+    </style>
+
+    <style name="Theme.V2" parent="Base.Theme.V2" />
+</resources>
