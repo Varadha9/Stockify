@@ -22,7 +22,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialize views
         nameInputLayout = findViewById(R.id.nameInputLayout);
         emailInputLayout = findViewById(R.id.emailInputLayout);
         passwordInputLayout = findViewById(R.id.passwordInputLayout);
@@ -34,39 +33,31 @@ public class RegisterActivity extends AppCompatActivity {
         MaterialButton registerButton = findViewById(R.id.registerButton);
         TextView loginLinkText = findViewById(R.id.loginLinkText);
 
-        // Set click listeners
         registerButton.setOnClickListener(v -> attemptRegistration());
-
         loginLinkText.setOnClickListener(v -> {
-            // Navigate back to LoginActivity
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-            finish(); // Close this activity
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
         });
     }
 
     private void attemptRegistration() {
-        // Reset errors
         nameInputLayout.setError(null);
         emailInputLayout.setError(null);
         passwordInputLayout.setError(null);
         confirmPasswordInputLayout.setError(null);
 
-        // Get values
-        String name = nameEditText.getText().toString().trim();
-        String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
-        String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+        String name = nameEditText.getText() != null ? nameEditText.getText().toString().trim() : "";
+        String email = emailEditText.getText() != null ? emailEditText.getText().toString().trim() : "";
+        String password = passwordEditText.getText() != null ? passwordEditText.getText().toString() : "";
+        String confirmPassword = confirmPasswordEditText.getText() != null ? confirmPasswordEditText.getText().toString() : "";
 
         boolean isValid = true;
 
-        // Validate name
         if (TextUtils.isEmpty(name)) {
             nameInputLayout.setError(getString(R.string.error_name_empty));
             isValid = false;
         }
 
-        // Validate email
         if (TextUtils.isEmpty(email)) {
             emailInputLayout.setError(getString(R.string.error_email_empty));
             isValid = false;
@@ -75,7 +66,6 @@ public class RegisterActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Validate password
         if (TextUtils.isEmpty(password)) {
             passwordInputLayout.setError(getString(R.string.error_password_empty));
             isValid = false;
@@ -84,7 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Validate confirm password
         if (TextUtils.isEmpty(confirmPassword)) {
             confirmPasswordInputLayout.setError(getString(R.string.error_password_empty));
             isValid = false;
@@ -94,19 +83,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (isValid) {
-            performRegistration(name, email, password);
+            getSharedPreferences("UserPrefs", MODE_PRIVATE).edit()
+                    .putString("regEmail", email)
+                    .putString("regPassword", PasswordUtils.hashNewPassword(password))
+                    .putString("regName", name)
+                    .apply();
+            Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
-    }
-
-    private void performRegistration(String name, String email, String password) {
-        // TODO: Implement your actual registration logic here
-        // This could be Firebase Auth, API call, or database storage
-
-        // For now, show success message and navigate to Login
-        Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show();
-
-        // Navigate back to LoginActivity
-        startActivity(new Intent(this, LoginActivity.class));
-        finish(); // Close this activity
     }
 }

@@ -1,41 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App Info -->
-    <string name="app_name">Modern Login App</string>
+    <!-- App -->
+    <string name="app_name">Stockify</string>
+    <string name="app_tagline">Inventory made simple</string>
 
-    <!-- Form Labels -->
+    <!-- Auth screens -->
+    <string name="welcome_back_title">Welcome back</string>
+    <string name="sign_in_subtitle">Sign in to Stockify</string>
+    <string name="create_account_title">Create account</string>
+    <string name="create_account_subtitle">Join Stockify — it\'s free</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="full_name">Full Name</string>
     <string name="confirm_password">Confirm Password</string>
-
-    <!-- Button Texts -->
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-
-    <!-- Navigation Links -->
+    <string name="password_helper">At least 6 characters</string>
+    <string name="login">Sign In</string>
+    <string name="register">Create Account</string>
     <string name="dont_have_account">Don\'t have an account? Register</string>
-    <string name="already_have_account">Already have an account? Login</string>
+    <string name="already_have_account">Already have an account? Sign in</string>
 
-    <!-- Error Messages -->
-    <string name="error_email_empty">Please enter your email address</string>
-    <string name="error_email_invalid">Please enter a valid email address</string>
-    <string name="error_password_empty">Please enter your password</string>
-    <string name="error_password_length">Password must be at least 6 characters</string>
-    <string name="error_name_empty">Please enter your full name</string>
-    <string name="error_passwords_dont_match">Passwords do not match. Please try again</string>
+    <!-- Onboarding -->
+    <string name="btn_skip">Skip</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_get_started">Get Started</string>
 
-    <!-- Accessibility Content Descriptions -->
-    <string name="content_description_logo">App Logo</string>
-    <string name="content_description_email_icon">Email Icon</string>
-    <string name="content_description_password_icon">Password Icon</string>
-
-    <string name="item_image_desc">Item image</string>
-
-
+    <!-- Navigation titles -->
     <string name="title_dashboard">Dashboard</string>
     <string name="title_inventory">Inventory</string>
     <string name="title_scan">Scan</string>
     <string name="title_reports">Reports</string>
     <string name="title_settings">Settings</string>
+
+    <!-- Dashboard -->
+    <string name="greeting_morning">Good Morning</string>
+    <string name="greeting_afternoon">Good Afternoon</string>
+    <string name="greeting_evening">Good Evening</string>
+    <string name="dashboard_subtitle">A friendly view of your inventory.</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="inventory_stats">Inventory Stats</string>
+    <string name="recent_activity">Recent Activity</string>
+    <string name="recent_items">Recent items</string>
+    <string name="view_all">View all →</string>
+    <string name="btn_add_short">+ Add</string>
+    <string name="label_items_in_stock">Items in stock</string>
+    <string name="label_total_value">Total value</string>
+    <string name="label_low_stock">Low stock</string>
+    <string name="label_distinct_items">Distinct items</string>
+    <string name="label_items_in_stock_upper">ITEMS IN STOCK</string>
+    <string name="label_low_stock_upper">LOW STOCK</string>
+    <string name="label_total_value_upper">TOTAL VALUE</string>
+    <string name="trend_chart_title">7-day value trend</string>
+    <string name="stat_placeholder">0</string>
+    <string name="value_placeholder">₹0</string>
+    <string name="dash_placeholder">--</string>
+    <string name="manage_subtitle">Manage your inventory efficiently</string>
+
+    <!-- Quick action labels -->
+    <string name="action_add_item">Add Item</string>
+    <string name="action_view_inventory">Inventory</string>
+    <string name="action_scan_item">Scan Item</string>
+    <string name="action_delete_item">Delete Item</string>
+    <string name="action_scan_short">Scan</string>
+    <string name="action_delete_short">Delete</string>
+    <string name="action_plus">+</string>
+
+    <!-- Inventory screen -->
+    <string name="inventory_title">Inventory</string>
+    <string name="inventory_zero_items">0 items</string>
+    <string name="search_hint">Search name, SKU, supplier…</string>
+    <string name="btn_sort">Sort</string>
+    <string name="btn_bulk">Bulk</string>
+    <string name="btn_export">Export</string>
+
+    <!-- Add / Edit item -->
+    <string name="add_item_title">Add New Item</string>
+    <string name="edit_item_title">Edit Item</string>
+    <string name="section_identity">IDENTITY</string>
+    <string name="section_stock_pricing">STOCK &amp; PRICING</string>
+    <string name="section_pricing_alerts">PRICING &amp; ALERTS</string>
+    <string name="section_notes">NOTES</string>
+    <string name="hint_item_name_required">Item Name *</string>
+    <string name="hint_item_name">Item Name</string>
+    <string name="hint_sku">SKU / Item Code</string>
+    <string name="hint_sku_helper">Auto-filled from barcode scan</string>
+    <string name="hint_category_required">Category *</string>
+    <string name="hint_category">Category</string>
+    <string name="hint_supplier">Supplier / Vendor</string>
+    <string name="hint_price_required">Price (₹) *</string>
+    <string name="hint_price">Price (₹)</string>
+    <string name="hint_quantity_required">Quantity *</string>
+    <string name="hint_low_stock_required">Low Stock Alert Threshold *</string>
+    <string name="hint_low_stock">Low Stock Alert</string>
+    <string name="hint_low_stock_helper">Alert when quantity falls below this number</string>
+    <string name="hint_description">Description (Optional)</string>
+    <string name="default_low_stock_value">5</string>
+    <string name="btn_save_item">Save Item</string>
+    <string name="btn_save_changes">Save Changes</string>
+    <string name="btn_delete_item">Delete</string>
+    <string name="tap_to_add_photo">Tap to add photo</string>
+    <string name="tap_to_change_photo">Tap to change photo</string>
+    <string name="label_current_stock">CURRENT STOCK</string>
+    <string name="label_units">units</string>
+    <string name="label_qty">qty</string>
+    <string name="label_zero">0</string>
+    <string name="label_one">1</string>
+
+    <!-- Delete item -->
+    <string name="delete_item_title">Delete Item</string>
+    <string name="delete_warning">This action is permanent and cannot be undone.</string>
+    <string name="section_select_item">SELECT ITEM TO REMOVE</string>
+    <string name="hint_search_item">Search or select item</string>
+    <string name="btn_permanently_delete">Permanently Delete</string>
+
+    <!-- Scan -->
+    <string name="scan_title">Scan Barcode</string>
+    <string name="scan_heading">Scan a Barcode</string>
+    <string name="scan_body">Point your camera at a barcode to quickly add or look up items in your inventory</string>
+    <string name="btn_start_scanning">Start Scanning</string>
+
+    <!-- Reports -->
+    <string name="reports_title">Reports</string>
+    <string name="reports_subtitle">Insights into your inventory</string>
+    <string name="label_total_units">Total Units</string>
+    <string name="label_low_stock_report">Low Stock</string>
+    <string name="label_total_value_report">Total Value</string>
+    <string name="section_category_mix">Category Mix</string>
+    <string name="section_stock_levels">Stock Levels</string>
+    <string name="section_by_supplier">By Supplier</string>
+    <string name="section_recent_activity">Recent Activity</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_subtitle">Account, data, and preferences</string>
+    <string name="section_preferences">PREFERENCES</string>
+    <string name="section_data">DATA</string>
+    <string name="section_account">ACCOUNT</string>
+    <string name="hint_currency">Currency</string>
+    <string name="btn_export_csv">Export CSV</string>
+    <string name="btn_backup_json">Backup JSON</string>
+    <string name="btn_restore_json">Restore JSON</string>
+    <string name="btn_change_password">Change Password</string>
+    <string name="btn_sign_out">Sign Out</string>
+    <string name="placeholder_avatar">U</string>
+    <string name="placeholder_user">User</string>
+    <string name="placeholder_email">user@email.com</string>
+
+    <!-- Item list row -->
+    <string name="placeholder_product_name">Product Name</string>
+    <string name="placeholder_category">Category</string>
+    <string name="placeholder_sku">SKU</string>
+    <string name="placeholder_initial">A</string>
+    <string name="placeholder_qty">Qty: 0</string>
+    <string name="label_in_stock">In Stock</string>
+    <string name="label_edit_arrow">Edit →</string>
+    <string name="label_low_stock_badge">Low Stock</string>
+
+    <!-- Inventory empty state -->
+    <string name="empty_inventory_title">No items yet</string>
+    <string name="empty_inventory_body">Tap + Add to add your first inventory item</string>
+    <string name="empty_inventory_body_short">Tap + to add your first item</string>
+    <string name="empty_inventory_cd">Empty inventory</string>
+    <string name="empty_recent_activity">No items yet — add your first one!</string>
+    <string name="empty_trend_data">No trend data yet</string>
+    <string name="no_recent_activity">No recent activity</string>
+
+    <!-- Content descriptions -->
+    <string name="content_description_logo">Stockify logo</string>
+    <string name="content_description_back">Go back</string>
+    <string name="content_description_add_item">Add new item</string>
+    <string name="content_description_scan">Scan barcode</string>
+    <string name="content_description_delete">Delete item</string>
+    <string name="content_description_save">Save changes</string>
+    <string name="content_description_email_icon">Email field icon</string>
+    <string name="content_description_password_icon">Password field icon</string>
+    <string name="item_image_desc">Item image</string>
+    <string name="content_description_item_image">Item photo</string>
+
+    <!-- Validation errors -->
+    <string name="error_email_empty">Please enter your email address</string>
+    <string name="error_email_invalid">Please enter a valid email address</string>
+    <string name="error_password_empty">Please enter your password</string>
+    <string name="error_password_length">Password must be at least 6 characters</string>
+    <string name="error_name_empty">Please enter your full name</string>
+    <string name="error_passwords_dont_match">Passwords do not match</string>
+
+    <!-- Toast / feedback -->
+    <string name="item_added">Item added successfully</string>
+    <string name="item_updated">Item updated</string>
+    <string name="item_deleted">Item deleted</string>
+    <string name="bulk_update_applied">Bulk update applied</string>
+    <string name="csv_export_failed">CSV export failed</string>
+    <string name="backup_saved">Backup saved</string>
+    <string name="backup_failed">Backup failed</string>
+    <string name="restore_failed">Restore failed</string>
+    <string name="currency_updated">Currency updated</string>
+    <string name="password_updated">Password updated</string>
+    <string name="scan_cancelled">Scan cancelled</string>
+    <string name="camera_permission_required">Camera permission is required for scanning</string>
+    <string name="scanned_barcode">Scanned: %s</string>
+    <string name="invalid_item">Item not found</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_delete_title">Delete \"%s\"?</string>
+    <string name="dialog_delete_message">This cannot be undone.</string>
+    <string name="dialog_confirm_restore_title">Restore backup?</string>
+    <string name="dialog_confirm_restore_message">This replaces current inventory, logs, and snapshots.</string>
+    <string name="dialog_sort_title">Sort inventory</string>
+    <string name="dialog_change_password_title">Change Password</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_apply">Apply</string>
+    <string name="btn_restore">Restore</string>
+    <string name="btn_update">Update</string>
+
+    <!-- Plurals -->
+    <plurals name="item_count">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+
+    <!-- Welcome greetings -->
+    <string name="welcome_generic">Welcome!</string>
+    <string name="welcome_name">Welcome, %s!</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="hey_name">Hey, %s!</string>
+
+    <!-- Privacy policy -->
+    <string name="privacy_policy_url">https://your-website.com/stockify-privacy-policy</string>
+    <string name="privacy_policy_label">Privacy Policy</string>
 </resources>

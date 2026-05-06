@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_primary">#8B84FF</color>
+    <color name="brand_primary_dark">#B9B5FF</color>
+    <color name="brand_primary_light">#C9C5FF</color>
+    <color name="brand_primary_surface">#252548</color>
+
+    <color name="color_success">#2DD4A7</color>
+    <color name="color_success_bg">#12382F</color>
+    <color name="color_warning">#FFB45C</color>
+    <color name="color_warning_bg">#3F2A13</color>
+    <color name="color_error">#FF7A92</color>
+    <color name="color_error_bg">#3F1822</color>
+    <color name="color_info">#72D4FF</color>
+    <color name="color_info_bg">#123240</color>
+
+    <color name="neutral_50">#151725</color>
+    <color name="neutral_100">#202235</color>
+    <color name="neutral_200">#30334A</color>
+    <color name="neutral_300">#444862</color>
+    <color name="neutral_400">#747B9D</color>
+    <color name="neutral_500">#A6ACC8</color>
+    <color name="neutral_600">#C6CBE0</color>
+    <color name="neutral_700">#DADDEE</color>
+    <color name="neutral_800">#ECEEFA</color>
+    <color name="neutral_900">#FFFFFF</color>
+
+    <color name="surface_white">#181A29</color>
+    <color name="surface_bg">#10121D</color>
+    <color name="surface_card">#181A29</color>
+    <color name="surface_elevated">#202235</color>
+
+    <color name="text_heading">#F4F6FF</color>
+    <color name="text_body">#DADDEE</color>
+    <color name="text_secondary">#A6ACC8</color>
+    <color name="text_hint">#747B9D</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_dark">#FFFFFF</color>
+
+    <color name="gradient_start">#24214F</color>
+    <color name="gradient_mid">#2C235C</color>
+    <color name="gradient_end">#392262</color>
+    <color name="header_bg">#10121D</color>
+
+    <color name="primary">@color/brand_primary</color>
+    <color name="on_primary">@color/text_on_primary</color>
+    <color name="primary_container">@color/brand_primary_surface</color>
+    <color name="on_primary_container">@color/brand_primary_light</color>
+    <color name="secondary">@color/color_success</color>
+    <color name="on_secondary">@color/text_on_primary</color>
+    <color name="secondary_container">@color/color_success_bg</color>
+    <color name="on_secondary_container">#D8FFF4</color>
+    <color name="tertiary">#C084FC</color>
+    <color name="on_tertiary">@color/text_on_primary</color>
+    <color name="error">@color/color_error</color>
+    <color name="on_error">@color/text_on_primary</color>
+    <color name="error_container">@color/color_error_bg</color>
+    <color name="background">@color/surface_bg</color>
+    <color name="on_background">@color/text_heading</color>
+    <color name="surface">@color/surface_white</color>
+    <color name="on_surface">@color/text_heading</color>
+    <color name="surface_variant">@color/brand_primary_surface</color>
+    <color name="outline">@color/neutral_200</color>
+    <color name="outline_variant">@color/neutral_100</color>
+    <color name="primary_dark">@color/brand_primary_dark</color>
+    <color name="primary_light">@color/brand_primary_light</color>
+    <color name="accent">@color/color_warning</color>
+    <color name="warning">@color/color_warning</color>
+    <color name="success">@color/color_success</color>
+    <color name="text_primary">@color/text_heading</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="card_stroke">@color/neutral_200</color>
+    <color name="status_in_stock">@color/color_success</color>
+    <color name="status_low_stock">@color/color_warning</color>
+    <color name="status_out_of_stock">@color/color_error</color>
+</resources>

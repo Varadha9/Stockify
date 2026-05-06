@@ -4,82 +4,100 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityAdapter.ViewHolder> {
+
     private final Context context;
-    private final List<RecentActivityItem> itemList;
-    private final OnItemClickListener listener;
+    private final List<StockLog> logs;
+    private final SimpleDateFormat fmt =
+            new SimpleDateFormat("MMM d, h:mm a", Locale.getDefault());
 
-    public interface OnItemClickListener {
-        void onIncrementClick(int position);
-        void onDecrementClick(int position);
-        void onDetailsClick(int position);
-    }
-
-    public RecentActivityAdapter(Context context, List<RecentActivityItem> itemList, OnItemClickListener listener) {
+    public RecentActivityAdapter(Context context, List<StockLog> logs) {
         this.context = context;
-        this.itemList = itemList;
-        this.listener = listener;
+        this.logs = logs;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_recent_activity, parent, false);
-        return new ViewHolder(view);
+        View v = LayoutInflater.from(context)
+                .inflate(R.layout.item_recent_activity, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RecentActivityItem item = itemList.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder h, int position) {
+        StockLog log = logs.get(position);
 
-        holder.itemName.setText(item.getName());
-        holder.itemCategory.setText(item.getCategory());
-        holder.itemPrice.setText("₹" + item.getPrice());
-        holder.itemQuantity.setText(String.valueOf(item.getQuantity()));
+        h.itemName.setText(log.getItemName());
+        h.itemCategory.setText(formatAction(log.getAction()));
+        h.itemStockStatus.setText(log.getDetail());
+        h.itemPrice.setText(fmt.format(new Date(log.getTimestamp())));
 
-        holder.itemStockStatus.setText(item.isInStock() ? "In Stock" : "Out of Stock");
-        holder.itemStockStatus.setTextColor(context.getResources().getColor(
-                item.isInStock() ? R.color.text_secondary : R.color.warning));
+        // Color the action label by type
+        int color = actionColor(log.getAction());
+        h.itemCategory.setTextColor(ContextCompat.getColor(context, color));
+        h.itemStockStatus.setTextColor(ContextCompat.getColor(context, R.color.text_secondary));
 
-        holder.itemImageView.setImageResource(item.getImageResId());
-
-        holder.incrementButton.setOnClickListener(v -> listener.onIncrementClick(position));
-        holder.decrementButton.setOnClickListener(v -> listener.onDecrementClick(position));
-        holder.detailsButton.setOnClickListener(v -> listener.onDetailsClick(position));
+        // Hide quantity controls — not relevant for a log entry
+        h.itemQuantity.setVisibility(View.GONE);
+        h.incrementButton.setVisibility(View.GONE);
+        h.decrementButton.setVisibility(View.GONE);
+        h.detailsButton.setVisibility(View.GONE);
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+        return Math.min(logs.size(), 8);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName, itemCategory, itemStockStatus, itemPrice, itemQuantity;
-        ImageView itemImageView;
-        MaterialButton incrementButton, decrementButton, detailsButton;
+    private String formatAction(String action) {
+        if (action == null) return "Updated";
+        switch (action) {
+            case "ADDED":           return "Added";
+            case "DELETED":         return "Deleted";
+            case "QTY_CHANGED":     return "Qty changed";
+            case "UPDATED":         return "Updated";
+            case "BULK_QTY_CHANGED":return "Bulk update";
+            default:                return action;
+        }
+    }
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemImageView = itemView.findViewById(R.id.itemImageView);
-            itemName = itemView.findViewById(R.id.itemName);
-            itemCategory = itemView.findViewById(R.id.itemCategory);
-            itemStockStatus = itemView.findViewById(R.id.itemStockStatus);
-            itemPrice = itemView.findViewById(R.id.itemPrice);
-            itemQuantity = itemView.findViewById(R.id.itemQuantity);
-            incrementButton = itemView.findViewById(R.id.incrementButton);
-            decrementButton = itemView.findViewById(R.id.decrementButton);
-            detailsButton = itemView.findViewById(R.id.detailsButton);
+    private int actionColor(String action) {
+        if (action == null) return R.color.text_secondary;
+        switch (action) {
+            case "ADDED":           return R.color.color_success;
+            case "DELETED":         return R.color.color_error;
+            case "QTY_CHANGED":
+            case "BULK_QTY_CHANGED":return R.color.color_warning;
+            default:                return R.color.brand_primary;
+        }
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView itemName, itemCategory, itemStockStatus, itemPrice, itemQuantity;
+        View incrementButton, decrementButton, detailsButton;
+
+        ViewHolder(@NonNull View v) {
+            super(v);
+            itemName        = v.findViewById(R.id.itemName);
+            itemCategory    = v.findViewById(R.id.itemCategory);
+            itemStockStatus = v.findViewById(R.id.itemStockStatus);
+            itemPrice       = v.findViewById(R.id.itemPrice);
+            itemQuantity    = v.findViewById(R.id.itemQuantity);
+            incrementButton = v.findViewById(R.id.incrementButton);
+            decrementButton = v.findViewById(R.id.decrementButton);
+            detailsButton   = v.findViewById(R.id.detailsButton);
         }
     }
 }

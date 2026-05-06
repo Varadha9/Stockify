@@ -7,37 +7,44 @@ import android.text.TextUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout emailInputLayout, passwordInputLayout;
     private TextInputEditText emailEditText, passwordEditText;
-    private MaterialButton loginButton;
     private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Check if user is already logged in
         sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+
+        if (!sharedPreferences.getBoolean("onboarding_done", false)) {
+            startActivity(new Intent(this, OnboardingActivity.class));
+            return;
+        }
+
         if (isUserLoggedIn()) {
             redirectToDashboard();
             return;
         }
 
         setContentView(R.layout.activity_login);
-
-        // Initialize views
         initializeViews();
-
-        // Set click listeners
         setupClickListeners();
+        setupBackHandler();
     }
 
     private void initializeViews() {
@@ -45,41 +52,46 @@ public class LoginActivity extends AppCompatActivity {
         passwordInputLayout = findViewById(R.id.passwordInputLayout);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
-        loginButton = findViewById(R.id.loginButton);
-    }
-
-    private void setupClickListeners() {
+        MaterialButton loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(v -> attemptLogin());
 
         TextView registerLinkText = findViewById(R.id.registerLinkText);
-        registerLinkText.setOnClickListener(v -> {
-            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        });
+        registerLinkText.setOnClickListener(v ->
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
+
+    private void setupClickListeners() {}
 
     private boolean isUserLoggedIn() {
         return sharedPreferences.getBoolean("isLoggedIn", false);
     }
 
     private void attemptLogin() {
-        // Reset errors
         emailInputLayout.setError(null);
         passwordInputLayout.setError(null);
 
-        // Get values
-        String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+        String email = emailEditText.getText() != null ? emailEditText.getText().toString().trim() : "";
+        String password = passwordEditText.getText() != null ? passwordEditText.getText().toString() : "";
 
-        if (validateInputs(email, password)) {
-            performLogin(email, password);
+        if (!validateInputs(email, password)) return;
+
+        String savedEmail = sharedPreferences.getString("regEmail", "");
+        String savedHash = sharedPreferences.getString("regPassword", "");
+
+        if (email.equals(savedEmail) && PasswordUtils.verifyPassword(password, savedHash)) {
+            sharedPreferences.edit()
+                    .putBoolean("isLoggedIn", true)
+                    .putString("userEmail", email)
+                    .apply();
+            redirectToDashboard();
+        } else {
+            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
         }
     }
 
     private boolean validateInputs(String email, String password) {
         boolean isValid = true;
 
-        // Validate email
         if (TextUtils.isEmpty(email)) {
             emailInputLayout.setError(getString(R.string.error_email_empty));
             isValid = false;
@@ -88,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
             isValid = false;
         }
 
-        // Validate password
         if (TextUtils.isEmpty(password)) {
             passwordInputLayout.setError(getString(R.string.error_password_empty));
             isValid = false;
@@ -100,40 +111,31 @@ public class LoginActivity extends AppCompatActivity {
         return isValid;
     }
 
-    private void performLogin(String email, String password) {
-        // TODO: Replace with your actual authentication logic
-        // This is just a mock implementation
-        if (isValidCredentials(email, password)) {
-            // Save login state
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("isLoggedIn", true);
-            editor.putString("userEmail", email);
-            editor.apply();
-
-            redirectToDashboard();
-        } else {
-            Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private boolean isValidCredentials(String email, String password) {
-        // Mock validation - replace with real authentication
-        return !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password);
-    }
-
     private void redirectToDashboard() {
-        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        scheduleNotifications();
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
-        // Prevent going back to previous activities if logged in
-        if (!isUserLoggedIn()) {
-            super.onBackPressed();
-        }
+    private void scheduleNotifications() {
+        PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(
+                LowStockWorker.class, 24, TimeUnit.HOURS)
+                .build();
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                "low_stock_check", ExistingPeriodicWorkPolicy.KEEP, work);
+    }
+
+    private void setupBackHandler() {
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!isUserLoggedIn()) {
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        });
     }
 }

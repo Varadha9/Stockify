@@ -3,9 +3,7 @@ package com.example.v2;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
@@ -21,7 +19,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
-import java.util.concurrent.Executors;
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -34,7 +31,7 @@ public class AddItemActivity extends AppCompatActivity {
     private Uri imageUri;
 
     private TextInputEditText nameEditText, priceEditText, quantityEditText,
-            lowStockEditText, descriptionEditText;
+            lowStockEditText, descriptionEditText, skuEditText, supplierEditText;
 
     private AutoCompleteTextView categoryAutoComplete;
     private TextInputLayout nameInputLayout, priceInputLayout,
@@ -57,6 +54,12 @@ public class AddItemActivity extends AppCompatActivity {
         initializeViews();
         setupCategoryDropdown();
         setupClickListeners();
+
+        // Pre-fill SKU if launched from barcode scan.
+        String sku = getIntent().getStringExtra("sku");
+        if (sku != null && !sku.isEmpty()) {
+            skuEditText.setText(sku);
+        }
     }
 
     private void initializeViews() {
@@ -69,15 +72,18 @@ public class AddItemActivity extends AppCompatActivity {
         quantityEditText = findViewById(R.id.quantityEditText);
         lowStockEditText = findViewById(R.id.lowStockEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
+        skuEditText = findViewById(R.id.skuEditText);
+        supplierEditText = findViewById(R.id.supplierEditText);
 
         nameInputLayout = findViewById(R.id.nameInputLayout);
         priceInputLayout = findViewById(R.id.priceInputLayout);
         quantityInputLayout = findViewById(R.id.quantityInputLayout);
         lowStockInputLayout = findViewById(R.id.lowStockInputLayout);
+        priceInputLayout.setHint("Price (" + CurrencyFormatter.getSymbol(this) + ") *");
 
         MaterialButton submitButton = findViewById(R.id.submitButton);
 
-        backButton.setOnClickListener(v -> onBackPressed());
+        backButton.setOnClickListener(v -> finish());
         submitButton.setOnClickListener(v -> validateAndSubmitItem());
     }
 
@@ -91,19 +97,20 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-        itemImageView.setOnClickListener(v -> openImagePicker());
+        android.view.ViewGroup imageContainer = (android.view.ViewGroup) itemImageView.getParent();
+        imageContainer.setOnClickListener(v -> openImagePicker());
     }
 
     private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         imagePickerLauncher.launch(intent);
     }
 
     private void validateAndSubmitItem() {
         if (!validateInputs()) return;
 
-        // Get values safely
         String name = Objects.requireNonNull(nameEditText.getText()).toString().trim();
         String category = Objects.requireNonNull(categoryAutoComplete.getText()).toString().trim();
         double price = Double.parseDouble(Objects.requireNonNull(priceEditText.getText()).toString());
@@ -111,9 +118,10 @@ public class AddItemActivity extends AppCompatActivity {
         int lowStockThreshold = Integer.parseInt(Objects.requireNonNull(lowStockEditText.getText()).toString());
         String description = Objects.requireNonNull(descriptionEditText.getText()).toString().trim();
         String imagePath = (imageUri != null) ? imageUri.toString() : "";
+        String sku = skuEditText.getText() != null ? skuEditText.getText().toString().trim() : "";
+        String supplier = supplierEditText.getText() != null ? supplierEditText.getText().toString().trim() : "";
 
-        InventoryItem item = new InventoryItem(name, category, price, quantity, lowStockThreshold, description, imagePath);
-
+        InventoryItem item = new InventoryItem(name, category, price, quantity, lowStockThreshold, description, imagePath, sku, supplier);
         saveItemToDatabase(item);
     }
 
@@ -178,11 +186,17 @@ public class AddItemActivity extends AppCompatActivity {
 
     private void saveItemToDatabase(InventoryItem item) {
         InventoryDatabase db = InventoryDatabase.getDatabase(this);
-        Executors.newSingleThreadExecutor().execute(() -> {
+        AppExecutor.get().execute(() -> {
             db.inventoryDao().insertItem(item);
-
+            db.stockLogDao().insert(new StockLog(
+                    item.getName(),
+                    "ADDED",
+                    "Created with qty " + item.getQuantity(),
+                    System.currentTimeMillis()
+            ));
+            InventoryAnalytics.recordTodaySnapshot(this);
             runOnUiThread(() -> {
-                Toast.makeText(this, "Item added successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.item_added, Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 finish();
             });

@@ -1,9 +1,26 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.V2" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here if needed -->
-        <!-- Most colors will automatically adapt through Material 3's theming system -->
-    </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.V2" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/text_on_primary</item>
+        <item name="colorPrimaryContainer">@color/brand_primary_surface</item>
+        <item name="colorOnPrimaryContainer">@color/brand_primary_light</item>
+        <item name="colorSecondary">@color/color_success</item>
+        <item name="colorOnSecondary">@color/text_on_primary</item>
+        <item name="colorError">@color/color_error</item>
 
-    <style name="Theme.V2" parent="Base.Theme.V2" />
+        <item name="android:colorBackground">@color/surface_bg</item>
+        <item name="colorOnBackground">@color/text_heading</item>
+        <item name="colorSurface">@color/surface_white</item>
+        <item name="colorOnSurface">@color/text_heading</item>
+        <item name="colorOutline">@color/neutral_200</item>
+
+        <item name="android:statusBarColor">@color/header_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/surface_white</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:colorControlHighlight">#1A8B84FF</item>
+    </style>
 </resources>

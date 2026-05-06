@@ -13,3 +13,15 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Keystore files - NEVER commit these
+*.keystore
+*.jks
+keystore.properties
+release.keystore
+
+# Google services
+google-services.json
+
+# Local isolated Gradle cache for terminal builds
+.gradle-local/

@@ -3,8 +3,8 @@ package com.example.v2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,64 +18,46 @@ public class InventoryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private InventoryAdapter adapter;
-    private TextView emptyText;
+    private LinearLayout emptyStateLayout;
     private ProgressBar progressBar;
-    private FloatingActionButton fabAddItem;
-
-    private InventoryDatabase database;
-    private InventoryDao inventoryDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
-        // Initialize views
         recyclerView = findViewById(R.id.inventoryRecyclerView);
-        emptyText = findViewById(R.id.emptyText);
+        emptyStateLayout = findViewById(R.id.emptyStateLayout);
         progressBar = findViewById(R.id.progressBar);
-        fabAddItem = findViewById(R.id.fabAddItem);
+        FloatingActionButton fab = findViewById(R.id.fabAddItem);
 
-        // Setup RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new InventoryAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        // Setup Room DB
-        database = InventoryDatabase.getDatabase(this);
+        fab.setOnClickListener(v -> startActivity(new Intent(this, AddItemActivity.class)));
 
-        inventoryDao = database.inventoryDao();
-
-        // Add item button
-        fabAddItem.setOnClickListener(v -> {
-            Intent intent = new Intent(InventoryActivity.this, AddItemActivity.class);
-            startActivity(intent);
-        });
-
-        // Load items
-        loadInventoryItems();
-    }
-
-    private void loadInventoryItems() {
-        progressBar.setVisibility(View.VISIBLE);
-        new Thread(() -> {
-            List<InventoryItem> items = inventoryDao.getAllItems();
-            runOnUiThread(() -> {
-                progressBar.setVisibility(View.GONE);
-                if (items.isEmpty()) {
-                    emptyText.setVisibility(View.VISIBLE);
-                    adapter.setInventoryList(items);
-                } else {
-                    emptyText.setVisibility(View.GONE);
-                    adapter.setInventoryList(items);
-                }
-            });
-        }).start();
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadInventoryItems(); // Refresh when coming back
+        loadItems();
+    }
+
+    private void loadItems() {
+        progressBar.setVisibility(View.VISIBLE);
+        AppExecutor.get().execute(() -> {
+            List<InventoryItem> items = InventoryDatabase.getDatabase(this)
+                    .inventoryDao().getAllItems();
+            runOnUiThread(() -> {
+                progressBar.setVisibility(View.GONE);
+                adapter.setInventoryList(items);
+                boolean empty = items.isEmpty();
+                recyclerView.setVisibility(empty ? View.GONE : View.VISIBLE);
+                emptyStateLayout.setVisibility(empty ? View.VISIBLE : View.GONE);
+            });
+        });
     }
 }

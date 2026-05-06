@@ -1,29 +1,151 @@
 package com.example.v2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.InventoryViewHolder> {
 
-    private Context context;
-    private List<InventoryItem> inventoryList = new ArrayList<>();
-
-    public InventoryAdapter(Context context) {
-        this.context = context;
+    public interface SelectionListener {
+        void onSelectionChanged(int count);
     }
 
-    public void setInventoryList(List<InventoryItem> inventoryList) {
-        this.inventoryList = inventoryList;
+    public static final int SORT_NAME = 0;
+    public static final int SORT_LOW_STOCK = 1;
+    public static final int SORT_QTY_LOW_HIGH = 2;
+    public static final int SORT_QTY_HIGH_LOW = 3;
+    public static final int SORT_PRICE_LOW_HIGH = 4;
+    public static final int SORT_PRICE_HIGH_LOW = 5;
+
+    private final Context context;
+    private final SelectionListener selectionListener;
+    private final List<InventoryItem> fullList = new ArrayList<>();
+    private final List<InventoryItem> inventoryList = new ArrayList<>();
+    private final Set<Integer> selectedIds = new HashSet<>();
+
+    private boolean selectionMode = false;
+    private String query = "";
+    private String categoryFilter = "All";
+    private int sortMode = SORT_NAME;
+
+    public InventoryAdapter(Context context) {
+        this(context, null);
+    }
+
+    public InventoryAdapter(Context context, SelectionListener selectionListener) {
+        this.context = context;
+        this.selectionListener = selectionListener;
+    }
+
+    public void setInventoryList(List<InventoryItem> list) {
+        fullList.clear();
+        fullList.addAll(list);
+        applyFilters();
+    }
+
+    public void filter(String query) {
+        this.query = query == null ? "" : query.trim().toLowerCase(Locale.ROOT);
+        applyFilters();
+    }
+
+    public void setCategoryFilter(String categoryFilter) {
+        this.categoryFilter = categoryFilter == null || categoryFilter.trim().isEmpty()
+                ? "All" : categoryFilter;
+        applyFilters();
+    }
+
+    public void setSortMode(int sortMode) {
+        this.sortMode = sortMode;
+        applyFilters();
+    }
+
+    public void setSelectionMode(boolean selectionMode) {
+        this.selectionMode = selectionMode;
+        if (!selectionMode) selectedIds.clear();
         notifyDataSetChanged();
+        notifySelectionChanged();
+    }
+
+    public boolean isSelectionMode() {
+        return selectionMode;
+    }
+
+    public List<Integer> getSelectedIds() {
+        return new ArrayList<>(selectedIds);
+    }
+
+    public int getSelectedCount() {
+        return selectedIds.size();
+    }
+
+    private void applyFilters() {
+        inventoryList.clear();
+        for (InventoryItem item : fullList) {
+            if (!"All".equals(categoryFilter) && !categoryFilter.equals(item.getCategory())) {
+                continue;
+            }
+            if (!query.isEmpty() && !matchesQuery(item, query)) {
+                continue;
+            }
+            inventoryList.add(item);
+        }
+        sortItems();
+        notifyDataSetChanged();
+    }
+
+    private boolean matchesQuery(InventoryItem item, String query) {
+        return contains(item.getName(), query)
+                || contains(item.getCategory(), query)
+                || contains(item.getSku(), query)
+                || contains(item.getSupplier(), query);
+    }
+
+    private boolean contains(String value, String query) {
+        return value != null && value.toLowerCase(Locale.ROOT).contains(query);
+    }
+
+    private void sortItems() {
+        Comparator<InventoryItem> comparator;
+        switch (sortMode) {
+            case SORT_LOW_STOCK:
+                comparator = Comparator
+                        .comparing((InventoryItem item) -> item.getQuantity() > item.getLowStockThreshold())
+                        .thenComparingInt(InventoryItem::getQuantity);
+                break;
+            case SORT_QTY_LOW_HIGH:
+                comparator = Comparator.comparingInt(InventoryItem::getQuantity);
+                break;
+            case SORT_QTY_HIGH_LOW:
+                comparator = (a, b) -> Integer.compare(b.getQuantity(), a.getQuantity());
+                break;
+            case SORT_PRICE_LOW_HIGH:
+                comparator = Comparator.comparingDouble(InventoryItem::getPrice);
+                break;
+            case SORT_PRICE_HIGH_LOW:
+                comparator = (a, b) -> Double.compare(b.getPrice(), a.getPrice());
+                break;
+            case SORT_NAME:
+            default:
+                comparator = Comparator.comparing(item -> safe(item.getName()).toLowerCase(Locale.ROOT));
+                break;
+        }
+        Collections.sort(inventoryList, comparator);
     }
 
     @NonNull
@@ -36,9 +158,80 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
     @Override
     public void onBindViewHolder(@NonNull InventoryViewHolder holder, int position) {
         InventoryItem item = inventoryList.get(position);
+
         holder.name.setText(item.getName());
         holder.quantity.setText("Qty: " + item.getQuantity());
-        holder.price.setText("₹" + item.getPrice());
+        holder.price.setText(CurrencyFormatter.format(context, item.getPrice()));
+        holder.categoryBadge.setText(item.getCategory());
+        holder.meta.setText(buildMeta(item));
+
+        String initial = item.getName() == null || item.getName().isEmpty()
+                ? "?" : String.valueOf(item.getName().charAt(0)).toUpperCase(Locale.getDefault());
+        holder.initial.setText(initial);
+
+        boolean isLow = item.getQuantity() <= item.getLowStockThreshold();
+        holder.lowStockBadge.setVisibility(isLow ? View.VISIBLE : View.GONE);
+        holder.quantity.setTextColor(ContextCompat.getColor(context,
+                isLow ? R.color.color_error : R.color.text_secondary));
+
+        holder.checkBox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+        holder.checkBox.setChecked(selectedIds.contains(item.getId()));
+
+        holder.itemView.setOnLongClickListener(v -> {
+            if (!selectionMode) setSelectionMode(true);
+            toggleSelection(item.getId());
+            return true;
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+            if (selectionMode) {
+                toggleSelection(item.getId());
+            } else {
+                Intent intent = new Intent(context, EditItemActivity.class);
+                intent.putExtra("item_id", item.getId());
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+        holder.checkBox.setOnClickListener(v -> toggleSelection(item.getId()));
+    }
+
+    private String buildMeta(InventoryItem item) {
+        List<String> parts = new ArrayList<>();
+        if (item.getSku() != null && !item.getSku().isEmpty()) parts.add("SKU " + item.getSku());
+        if (item.getSupplier() != null && !item.getSupplier().isEmpty()) parts.add(item.getSupplier());
+        return parts.isEmpty() ? "No SKU or supplier" : join(parts);
+    }
+
+    private String join(List<String> parts) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < parts.size(); i++) {
+            if (i > 0) builder.append(" | ");
+            builder.append(parts.get(i));
+        }
+        return builder.toString();
+    }
+
+    private void toggleSelection(int itemId) {
+        if (selectedIds.contains(itemId)) {
+            selectedIds.remove(itemId);
+        } else {
+            selectedIds.add(itemId);
+        }
+        notifyDataSetChanged();
+        notifySelectionChanged();
+    }
+
+    private void notifySelectionChanged() {
+        if (selectionListener != null) {
+            selectionListener.onSelectionChanged(selectedIds.size());
+        }
+    }
+
+    private String safe(String value) {
+        return value == null ? "" : value;
     }
 
     @Override
@@ -47,13 +240,19 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
     }
 
     static class InventoryViewHolder extends RecyclerView.ViewHolder {
-        TextView name, quantity, price;
+        TextView name, quantity, price, initial, categoryBadge, lowStockBadge, meta;
+        CheckBox checkBox;
 
-        public InventoryViewHolder(@NonNull View itemView) {
+        InventoryViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.itemNameText);
             quantity = itemView.findViewById(R.id.itemQuantityText);
             price = itemView.findViewById(R.id.itemPriceText);
+            initial = itemView.findViewById(R.id.txt_item_initial);
+            categoryBadge = itemView.findViewById(R.id.txt_category_badge);
+            lowStockBadge = itemView.findViewById(R.id.txt_low_stock_badge);
+            meta = itemView.findViewById(R.id.itemMetaText);
+            checkBox = itemView.findViewById(R.id.itemCheckBox);
         }
     }
 }

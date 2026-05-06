@@ -1,61 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary colors -->
-    <color name="primary">#6750A4</color>
-    <color name="on_primary">#FFFFFF</color>
-    <color name="primary_container">#EADDFF</color>
-    <color name="on_primary_container">#21005E</color>
+    <!-- Brand -->
+    <color name="brand_primary">#6C63FF</color>
+    <color name="brand_primary_dark">#4B44CC</color>
+    <color name="brand_primary_light">#A89CFF</color>
+    <color name="brand_primary_surface">#EEF0FF</color>
 
-    <!-- Secondary colors -->
-    <color name="secondary">#625B71</color>
-    <color name="on_secondary">#FFFFFF</color>
-    <color name="secondary_container">#E8DEF8</color>
-    <color name="on_secondary_container">#1E192B</color>
+    <!-- Semantic -->
+    <color name="color_success">#00C896</color>
+    <color name="color_success_bg">#E0FBF4</color>
+    <color name="color_warning">#FF9F43</color>
+    <color name="color_warning_bg">#FFF3E0</color>
+    <color name="color_error">#FF5370</color>
+    <color name="color_error_bg">#FFEBEE</color>
+    <color name="color_info">#4FC3F7</color>
+    <color name="color_info_bg">#E1F5FE</color>
 
-    <!-- Tertiary colors -->
-    <color name="tertiary">#7D5260</color>
-    <color name="on_tertiary">#FFFFFF</color>
+    <!-- Neutrals -->
+    <color name="neutral_50">#F7F8FC</color>
+    <color name="neutral_100">#EEF0F6</color>
+    <color name="neutral_200">#DDE1EE</color>
+    <color name="neutral_300">#C2C8DC</color>
+    <color name="neutral_400">#9AA0B8</color>
+    <color name="neutral_500">#6B7194</color>
+    <color name="neutral_600">#4A4F6A</color>
+    <color name="neutral_700">#2E3250</color>
+    <color name="neutral_800">#1A1D35</color>
+    <color name="neutral_900">#0D0F1E</color>
 
-    <!-- Error colors -->
-    <color name="error">#B3261E</color>
-    <color name="on_error">#FFFFFF</color>
-    <color name="error_container">#F9DEDC</color>
+    <!-- Surfaces -->
+    <color name="surface_white">#FFFFFF</color>
+    <color name="surface_bg">#F7F8FC</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="surface_elevated">#FFFFFF</color>
 
-    <!-- Background/surface colors -->
-    <color name="background">#FFFBFE</color>
-    <color name="on_background">#1C1B1F</color>
-    <color name="surface">#FFFBFE</color>
-    <color name="on_surface">#1C1B1F</color>
-    <color name="surface_variant">#E7E0EC</color>
+    <!-- Text -->
+    <color name="text_heading">#1A1D35</color>
+    <color name="text_body">#2E3250</color>
+    <color name="text_secondary">#6B7194</color>
+    <color name="text_hint">#9AA0B8</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_on_dark">#FFFFFF</color>
 
-    <!-- Outline colors -->
-    <color name="outline">#79747E</color>
-    <color name="outline_variant">#CAC4D0</color>
+    <!-- Gradient -->
+    <color name="gradient_start">#6C63FF</color>
+    <color name="gradient_mid">#8B5CF6</color>
+    <color name="gradient_end">#A855F7</color>
+    <color name="header_bg">#6C63FF</color>
 
-
-
-
-
-
-    <color name="primary_dark">#2A1E78</color>
-    <color name="primary_light">#5F35F0</color>
-    <color name="accent">#5F35F0</color>
-    <color name="warning">#FF8B00</color>
-    <color name="success">#2E9E4F</color>
-    <color name="text_primary">#1A1A2E</color>
-    <color name="text_secondary">#4B4B5A</color>
+    <!-- Aliases -->
+    <color name="primary">@color/brand_primary</color>
+    <color name="on_primary">@color/text_on_primary</color>
+    <color name="primary_container">@color/brand_primary_surface</color>
+    <color name="on_primary_container">@color/brand_primary_dark</color>
+    <color name="secondary">@color/color_success</color>
+    <color name="on_secondary">@color/text_on_primary</color>
+    <color name="secondary_container">@color/color_success_bg</color>
+    <color name="on_secondary_container">#005C45</color>
+    <color name="tertiary">#A855F7</color>
+    <color name="on_tertiary">@color/text_on_primary</color>
+    <color name="error">@color/color_error</color>
+    <color name="on_error">@color/text_on_primary</color>
+    <color name="error_container">@color/color_error_bg</color>
+    <color name="background">@color/surface_bg</color>
+    <color name="on_background">@color/text_heading</color>
+    <color name="surface">@color/surface_white</color>
+    <color name="on_surface">@color/text_heading</color>
+    <color name="surface_variant">@color/brand_primary_surface</color>
+    <color name="outline">@color/neutral_200</color>
+    <color name="outline_variant">@color/neutral_100</color>
+    <color name="primary_dark">@color/brand_primary_dark</color>
+    <color name="primary_light">@color/brand_primary_light</color>
+    <color name="accent">@color/color_warning</color>
+    <color name="warning">@color/color_warning</color>
+    <color name="success">@color/color_success</color>
+    <color name="text_primary">@color/text_heading</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-
-
-    <!-- Add these to your existing colors.xml -->
-    <color name="card_stroke">#1F000000</color> <!-- Semi-transparent black -->
-
-
-    <!-- Status colors (optional) -->
-    <color name="status_in_stock">#4CAF50</color>
-    <color name="status_low_stock">#FF9800</color>
-    <color name="status_out_of_stock">#F44336</color>
-
+    <color name="card_stroke">@color/neutral_200</color>
+    <color name="status_in_stock">@color/color_success</color>
+    <color name="status_low_stock">@color/color_warning</color>
+    <color name="status_out_of_stock">@color/color_error</color>
 </resources>
