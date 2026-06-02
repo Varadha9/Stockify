@@ -39,128 +39,80 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <!-- Warning banner -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FFEBEE">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <!-- Warning banner — error state is visually distinct -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_warning"
+                app:tint="@color/color_error"/>
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#FFEBEE">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="20dp">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_warning"
-                        app:tint="@color/color_error"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_weight="1"
-                        android:text="This action is permanent and cannot be undone."
-                        android:textColor="@color/color_error"
-                        android:textSize="14sp"
-                        android:lineSpacingMultiplier="1.4"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Selection card -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:text="SELECT ITEM TO REMOVE"
-                        android:textColor="@color/text_hint"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:letterSpacing="0.1"/>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Search or select item"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:startIconDrawable="@drawable/ic_inventory"
-                        app:startIconTint="@color/color_error">
-                        <AutoCompleteTextView
-                            android:id="@+id/itemToDelete"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="text"/>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Destructive CTA — red, full width, clear label -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/deleteButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:layout_marginTop="24dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:text="Permanently Delete"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:backgroundTint="@color/color_error"
-                        app:cornerRadius="16dp"
-                        app:icon="@drawable/ic_delete"
-                        app:iconGravity="textStart"/>
-
-                    <!-- Cancel — clearly secondary -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/cancelButton"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="52dp"
-                        android:layout_marginTop="12dp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:text="Cancel"
-                        android:textSize="15sp"
-                        app:cornerRadius="16dp"
-                        app:strokeColor="@color/neutral_200"/>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="Tap an item to delete it. This action is permanent."
+                android:textColor="@color/color_error"
+                android:textSize="13sp"/>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Search box -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:hint="Search by name or SKU"
+        app:startIconDrawable="@drawable/ic_inventory"
+        app:startIconTint="@color/text_hint"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Item list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_delete_items"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:clipToPadding="false"/>
+
+    <!-- Cancel button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelButton"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_margin="16dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Cancel"
+        android:textSize="15sp"
+        app:cornerRadius="16dp"
+        app:strokeColor="@color/neutral_200"/>
 
 </LinearLayout>
-

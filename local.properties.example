@@ -1,0 +1,17 @@
+# Copy this file to local.properties and fill in your values.
+# local.properties is gitignored — NEVER commit your real keystore credentials.
+
+# Absolute path to your release keystore file
+KEYSTORE_PATH=/path/to/stockify-release.keystore
+
+# Keystore password (set when you ran keytool)
+KEYSTORE_PASSWORD=your_keystore_password
+
+# Key alias (set when you ran keytool)
+KEY_ALIAS=stockify
+
+# Key password (set when you ran keytool)
+KEY_PASSWORD=your_key_password
+
+# Android SDK location (required by Android Studio / Gradle)
+sdk.dir=/path/to/Android/Sdk

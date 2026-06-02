@@ -19,8 +19,8 @@ public final class AppExecutor {
                 t.setDaemon(true);
                 return t;
             },
-            // Discard oldest task rather than running on caller (main) thread
-            new ThreadPoolExecutor.DiscardOldestPolicy()
+            // CallerRunsPolicy: slows the caller instead of silently dropping DB writes
+            new ThreadPoolExecutor.CallerRunsPolicy()
     );
 
     private AppExecutor() {}

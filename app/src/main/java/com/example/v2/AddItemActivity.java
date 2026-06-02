@@ -10,14 +10,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class AddItemActivity extends AppCompatActivity {
@@ -40,9 +46,12 @@ public class AddItemActivity extends AppCompatActivity {
     private final ActivityResultLauncher<Intent> imagePickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    imageUri = result.getData().getData();
-                    itemImageView.setImageURI(imageUri);
-                    itemImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    Uri picked = result.getData().getData();
+                    if (picked != null) {
+                        imageUri = copyImageToInternal(picked);
+                        itemImageView.setImageURI(imageUri);
+                        itemImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    }
                 }
             });
 
@@ -83,8 +92,32 @@ public class AddItemActivity extends AppCompatActivity {
 
         MaterialButton submitButton = findViewById(R.id.submitButton);
 
-        backButton.setOnClickListener(v -> finish());
+        backButton.setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
         submitButton.setOnClickListener(v -> validateAndSubmitItem());
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (hasUnsavedInput()) {
+                    new AlertDialog.Builder(AddItemActivity.this)
+                            .setTitle("Discard changes?")
+                            .setMessage("You have unsaved changes. Leave anyway?")
+                            .setPositiveButton("Discard", (d, w) -> finish())
+                            .setNegativeButton("Keep editing", null)
+                            .show();
+                } else {
+                    finish();
+                }
+            }
+        });
+    }
+
+    private boolean hasUnsavedInput() {
+        return !TextUtils.isEmpty(nameEditText.getText())
+                || !TextUtils.isEmpty(skuEditText.getText())
+                || !TextUtils.isEmpty(supplierEditText.getText())
+                || !TextUtils.isEmpty(descriptionEditText.getText())
+                || imageUri != null;
     }
 
     private void setupCategoryDropdown() {
@@ -182,6 +215,24 @@ public class AddItemActivity extends AppCompatActivity {
         }
 
         return isValid;
+    }
+
+    private Uri copyImageToInternal(Uri source) {
+        try {
+            File dir = new File(getFilesDir(), "item_images");
+            if (!dir.exists()) dir.mkdirs();
+            File dest = new File(dir, "img_" + System.currentTimeMillis() + ".jpg");
+            try (InputStream in = getContentResolver().openInputStream(source);
+                 FileOutputStream out = new FileOutputStream(dest)) {
+                if (in == null) return source;
+                byte[] buf = new byte[4096];
+                int len;
+                while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
+            }
+            return Uri.fromFile(dest);
+        } catch (IOException e) {
+            return source; // fallback to original URI
+        }
     }
 
     private void saveItemToDatabase(InventoryItem item) {

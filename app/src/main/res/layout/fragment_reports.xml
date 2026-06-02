@@ -39,6 +39,39 @@
                 android:textSize="13sp"/>
         </LinearLayout>
 
+        <!-- ── Empty state (shown when inventory is empty) ── -->
+        <LinearLayout
+            android:id="@+id/reports_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="48dp"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_reports"
+                app:tint="@color/text_hint"
+                android:contentDescription="No data"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="No inventory data yet"
+                android:textColor="@color/text_heading"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Add items to your inventory to see reports and analytics here."
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"/>
+        </LinearLayout>
+
         <!-- ── KPI summary row — 3 equal tiles ── -->
         <LinearLayout
             android:layout_width="match_parent"

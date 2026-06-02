@@ -192,6 +192,7 @@
     <string name="csv_export_failed">CSV export failed</string>
     <string name="backup_saved">Backup saved</string>
     <string name="backup_failed">Backup failed</string>
+    <string name="restore_success">Restore successful</string>
     <string name="restore_failed">Restore failed</string>
     <string name="currency_updated">Currency updated</string>
     <string name="password_updated">Password updated</string>
@@ -226,6 +227,6 @@
     <string name="hey_name">Hey, %s!</string>
 
     <!-- Privacy policy -->
-    <string name="privacy_policy_url">https://your-website.com/stockify-privacy-policy</string>
+    <string name="privacy_policy_url">https://varadha9.github.io/stockify-privacy/</string>
     <string name="privacy_policy_label">Privacy Policy</string>
 </resources>

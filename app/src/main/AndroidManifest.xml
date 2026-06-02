@@ -55,8 +55,7 @@
         <activity android:name=".ScanActivity" android:exported="false" />
         <activity android:name=".EditItemActivity" android:exported="false" />
         <activity android:name=".MainActivity" android:exported="false" />
-        <activity android:name=".DashboardActivity" android:exported="false" />
-        <activity android:name=".InventoryActivity" android:exported="false" />
+
 
         <!-- Barcode Scanner Portrait Activity -->
         <activity

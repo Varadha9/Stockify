@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.Executors;
 
 public class ReportsFragment extends Fragment {
 
@@ -64,6 +63,7 @@ public class ReportsFragment extends Fragment {
         LinearLayout activityContainer = view.findViewById(R.id.report_activity_container);
         PieChart pieChart = view.findViewById(R.id.chart_category);
         BarChart barChart = view.findViewById(R.id.chart_stock_levels);
+        View emptyState = view.findViewById(R.id.reports_empty_state);
 
         AppExecutor.get().execute(() -> {
             InventoryDatabase db = InventoryDatabase.getDatabase(requireContext());
@@ -89,6 +89,8 @@ public class ReportsFragment extends Fragment {
             final double finalTotalValue = totalValue;
 
             requireActivity().runOnUiThread(() -> {
+                boolean empty = items.isEmpty();
+                emptyState.setVisibility(empty ? View.VISIBLE : View.GONE);
                 txtTotalItems.setText(String.valueOf(finalTotalUnits));
                 txtTotalValue.setText(CurrencyFormatter.format(requireContext(), finalTotalValue));
                 txtLowStock.setText(String.valueOf(finalLowStockCount));
@@ -96,7 +98,7 @@ public class ReportsFragment extends Fragment {
                 renderBreakdown(categoryContainer, categoryCount, "units");
                 renderBreakdown(supplierContainer, supplierCount, "units");
                 renderActivity(activityContainer, logs);
-                renderPieChart(pieChart, categoryCount);
+                renderPieChart(pieChart, empty ? new java.util.HashMap<>() : categoryCount);
                 renderBarChart(barChart, items);
             });
         });

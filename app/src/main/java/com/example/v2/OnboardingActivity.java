@@ -75,6 +75,9 @@ public class OnboardingActivity extends AppCompatActivity {
     public void finish() {
         getSharedPreferences("UserPrefs", MODE_PRIVATE)
                 .edit().putBoolean("onboarding_done", true).apply();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         super.finish();
     }
 
@@ -103,6 +106,9 @@ public class OnboardingActivity extends AppCompatActivity {
         public SlideVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_onboarding_slide, parent, false);
+            v.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
             return new SlideVH(v);
         }
 
