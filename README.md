@@ -177,11 +177,9 @@ app/src/main/java/com/example/v2/
 ### Clone & Run
 
 ```bash
-git clone https://github.com/Varadha9/MrManager-RetailApp.git
-cd MrManager-RetailApp
+git clone https://github.com/Varadha9/Stockify.git
+cd Stockify
 ```
-
-> 📝 The repository is named `MrManager-RetailApp` on GitHub — the app itself is called **Stockify**.
 
 1. Open the project in Android Studio
 2. Let Gradle sync complete
@@ -266,4 +264,4 @@ This project is for personal and educational use. All rights reserved © Varadha
 
 **Varadha** — [GitHub](https://github.com/Varadha9)
 
-> The GitHub repository is named `MrManager-RetailApp` for historical reasons. The published app name is **Stockify**.
+> Built with ❤️ for small retail businesses.
