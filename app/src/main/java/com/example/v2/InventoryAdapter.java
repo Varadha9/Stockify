@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.InventoryViewHolder> {
@@ -78,7 +80,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
     public void setSelectionMode(boolean selectionMode) {
         this.selectionMode = selectionMode;
         if (!selectionMode) selectedIds.clear();
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, inventoryList.size());
         notifySelectionChanged();
     }
 
@@ -95,18 +97,30 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
     }
 
     private void applyFilters() {
-        inventoryList.clear();
+        List<InventoryItem> newList = new ArrayList<>();
         for (InventoryItem item : fullList) {
-            if (!"All".equals(categoryFilter) && !categoryFilter.equals(item.getCategory())) {
-                continue;
-            }
-            if (!query.isEmpty() && !matchesQuery(item, query)) {
-                continue;
-            }
-            inventoryList.add(item);
+            if (!"All".equals(categoryFilter) && !categoryFilter.equals(item.getCategory())) continue;
+            if (!query.isEmpty() && !matchesQuery(item, query)) continue;
+            newList.add(item);
         }
-        sortItems();
-        notifyDataSetChanged();
+        sortList(newList);
+        DiffUtil.DiffResult diff = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override public int getOldListSize() { return inventoryList.size(); }
+            @Override public int getNewListSize() { return newList.size(); }
+            @Override public boolean areItemsTheSame(int o, int n) {
+                return inventoryList.get(o).getId() == newList.get(n).getId();
+            }
+            @Override public boolean areContentsTheSame(int o, int n) {
+                InventoryItem a = inventoryList.get(o), b = newList.get(n);
+                return a.getQuantity() == b.getQuantity()
+                        && Double.compare(a.getPrice(), b.getPrice()) == 0
+                        && Objects.equals(a.getName(), b.getName())
+                        && Objects.equals(a.getCategory(), b.getCategory());
+            }
+        });
+        inventoryList.clear();
+        inventoryList.addAll(newList);
+        diff.dispatchUpdatesTo(this);
     }
 
     private boolean matchesQuery(InventoryItem item, String query) {
@@ -120,7 +134,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
         return value != null && value.toLowerCase(Locale.ROOT).contains(query);
     }
 
-    private void sortItems() {
+    private void sortList(List<InventoryItem> list) {
         Comparator<InventoryItem> comparator;
         switch (sortMode) {
             case SORT_LOW_STOCK:
@@ -145,7 +159,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
                 comparator = Comparator.comparing(item -> safe(item.getName()).toLowerCase(Locale.ROOT));
                 break;
         }
-        Collections.sort(inventoryList, comparator);
+        Collections.sort(list, comparator);
     }
 
     @NonNull
@@ -215,13 +229,18 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
     }
 
     private void toggleSelection(int itemId) {
-        if (selectedIds.contains(itemId)) {
-            selectedIds.remove(itemId);
-        } else {
-            selectedIds.add(itemId);
-        }
-        notifyDataSetChanged();
+        if (selectedIds.contains(itemId)) selectedIds.remove(itemId);
+        else selectedIds.add(itemId);
+        int pos = indexOfId(itemId);
+        if (pos >= 0) notifyItemChanged(pos);
         notifySelectionChanged();
+    }
+
+    private int indexOfId(int id) {
+        for (int i = 0; i < inventoryList.size(); i++) {
+            if (inventoryList.get(i).getId() == id) return i;
+        }
+        return -1;
     }
 
     private void notifySelectionChanged() {

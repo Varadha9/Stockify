@@ -66,6 +66,11 @@ public class InventoryFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
 
+        if (pendingLowStockSort) {
+            pendingLowStockSort = false;
+            adapter.setSortMode(InventoryAdapter.SORT_LOW_STOCK);
+        }
+
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void afterTextChanged(Editable s) {}
@@ -243,6 +248,17 @@ public class InventoryFragment extends Fragment {
             btnBulkAdjust.setText("Cancel");
         } else {
             btnBulkAdjust.setText("Apply (" + count + ")");
+        }
+    }
+
+    private boolean pendingLowStockSort = false;
+
+    public void preselectLowStockSort() {
+        if (adapter != null) {
+            adapter.setSortMode(InventoryAdapter.SORT_LOW_STOCK);
+            refreshEmptyState();
+        } else {
+            pendingLowStockSort = true;
         }
     }
 
