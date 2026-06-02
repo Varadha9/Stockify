@@ -1,4 +1,4 @@
-# 📦 MrManager — Retail Inventory App
+# 📦 Stockify — Retail Inventory App
 
 > A modern, offline-first Android inventory management app built for small retail businesses. Track stock, scan barcodes, get low-stock alerts, and export reports — all from your phone.
 
@@ -95,7 +95,7 @@
 | Barcode Scanning | ZXing Android Embedded 4.3.0 |
 | UI Components | Material Design 3, ConstraintLayout, RecyclerView, ViewPager2 |
 | Navigation | Bottom Navigation + Fragment transactions |
-| Threading | Custom `AppExecutor` (single background thread) |
+| Threading | Custom `AppExecutor` (4-thread pool, queue of 256) |
 | Data Export | CSV via `FileProvider`, JSON backup/restore |
 
 ---
@@ -181,6 +181,8 @@ git clone https://github.com/Varadha9/MrManager-RetailApp.git
 cd MrManager-RetailApp
 ```
 
+> 📝 The repository is named `MrManager-RetailApp` on GitHub — the app itself is called **Stockify**.
+
 1. Open the project in Android Studio
 2. Let Gradle sync complete
 3. Run on a device or emulator (`Shift+F10`)
@@ -263,3 +265,5 @@ This project is for personal and educational use. All rights reserved © Varadha
 ## 🙋 Author
 
 **Varadha** — [GitHub](https://github.com/Varadha9)
+
+> The GitHub repository is named `MrManager-RetailApp` for historical reasons. The published app name is **Stockify**.
