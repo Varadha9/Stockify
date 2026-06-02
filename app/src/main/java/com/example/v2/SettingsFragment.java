@@ -213,7 +213,7 @@ public class SettingsFragment extends Fragment {
                 CurrencyFormatter.setSymbol(requireContext(), data.currencySymbol);
                 InventoryAnalytics.recordTodaySnapshot(requireContext());
                 requireActivity().runOnUiThread(() ->
-                        Toast.makeText(requireContext(), R.string.backup_saved, Toast.LENGTH_SHORT).show());
+                        Toast.makeText(requireContext(), R.string.restore_success, Toast.LENGTH_SHORT).show());
             } catch (IOException | JSONException e) {
                 requireActivity().runOnUiThread(() ->
                         Toast.makeText(requireContext(), R.string.restore_failed, Toast.LENGTH_SHORT).show());
