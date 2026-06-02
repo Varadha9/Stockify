@@ -235,6 +235,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
+                            android:maxLength="100"
                             android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -253,6 +254,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
+                            android:maxLength="50"
                             android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -289,6 +291,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text"
+                            android:maxLength="100"
                             android:imeOptions="actionNext"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -383,6 +386,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="top"
                             android:inputType="textMultiLine"
+                            android:maxLength="500"
                             android:minLines="3"
                             android:maxLines="5"/>
                     </com.google.android.material.textfield.TextInputLayout>

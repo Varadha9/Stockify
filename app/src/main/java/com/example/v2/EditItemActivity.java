@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +20,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class EditItemActivity extends AppCompatActivity {
@@ -43,10 +48,13 @@ public class EditItemActivity extends AppCompatActivity {
     private final ActivityResultLauncher<Intent> imagePickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    imageUri = result.getData().getData();
-                    itemImageView.setImageURI(imageUri);
-                    itemImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    itemImageView.setPadding(0, 0, 0, 0);
+                    Uri picked = result.getData().getData();
+                    if (picked != null) {
+                        imageUri = copyImageToInternal(picked);
+                        itemImageView.setImageURI(imageUri);
+                        itemImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                        itemImageView.setPadding(0, 0, 0, 0);
+                    }
                 }
             });
 
@@ -68,7 +76,23 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        findViewById(R.id.backButton).setOnClickListener(v -> finish());
+        findViewById(R.id.backButton).setOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (currentItem != null && hasUnsavedChanges()) {
+                    new AlertDialog.Builder(EditItemActivity.this)
+                            .setTitle("Discard changes?")
+                            .setMessage("You have unsaved changes. Leave anyway?")
+                            .setPositiveButton("Discard", (d, w) -> finish())
+                            .setNegativeButton("Keep editing", null)
+                            .show();
+                } else {
+                    finish();
+                }
+            }
+        });
 
         txtCurrentQty     = findViewById(R.id.txt_current_qty);
         itemImageView     = findViewById(R.id.itemImageView);
@@ -100,6 +124,17 @@ public class EditItemActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(v -> confirmDelete());
         android.view.ViewGroup imageContainer = (android.view.ViewGroup) itemImageView.getParent();
         imageContainer.setOnClickListener(v -> openImagePicker());
+    }
+
+    private boolean hasUnsavedChanges() {
+        if (currentItem == null) return false;
+        String name = nameEditText.getText() != null ? nameEditText.getText().toString().trim() : "";
+        String priceStr = priceEditText.getText() != null ? priceEditText.getText().toString().trim() : "";
+        double price = 0;
+        try { price = Double.parseDouble(priceStr); } catch (NumberFormatException ignored) {}
+        return !name.equals(currentItem.getName())
+                || Double.compare(price, currentItem.getPrice()) != 0
+                || currentQty != currentItem.getQuantity();
     }
 
     private void populateFields() {
@@ -231,6 +266,24 @@ public class EditItemActivity extends AppCompatActivity {
                 finish();
             });
         });
+    }
+
+    private Uri copyImageToInternal(Uri source) {
+        try {
+            File dir = new File(getFilesDir(), "item_images");
+            if (!dir.exists()) dir.mkdirs();
+            File dest = new File(dir, "img_" + System.currentTimeMillis() + ".jpg");
+            try (InputStream in = getContentResolver().openInputStream(source);
+                 FileOutputStream out = new FileOutputStream(dest)) {
+                if (in == null) return source;
+                byte[] buf = new byte[4096];
+                int len;
+                while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
+            }
+            return Uri.fromFile(dest);
+        } catch (IOException e) {
+            return source;
+        }
     }
 
     private void openImagePicker() {
