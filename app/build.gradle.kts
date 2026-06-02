@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -10,18 +13,27 @@ android {
         applicationId = "com.stockify.inventory"
         minSdk = 24
         targetSdk = 35
+        // Increment versionCode by 1 for every Play Store release. Never reuse a value.
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
+        // Signing credentials are read from local.properties (never committed to git).
+        // See local.properties.example for the required keys.
+        val localProps = Properties()
+        val localPropsFile = rootProject.file("local.properties")
+        if (localPropsFile.exists()) localProps.load(FileInputStream(localPropsFile))
+
         create("release") {
-            // TODO: Replace with your actual keystore before publishing
-            // storeFile = file(System.getenv("KEYSTORE_PATH") ?: "release.keystore")
-            // storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
-            // keyAlias = System.getenv("KEY_ALIAS") ?: ""
-            // keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+            val keystorePath = localProps.getProperty("KEYSTORE_PATH") ?: System.getenv("KEYSTORE_PATH")
+            if (keystorePath != null) {
+                storeFile = file(keystorePath)
+                storePassword = localProps.getProperty("KEYSTORE_PASSWORD") ?: System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias = localProps.getProperty("KEY_ALIAS") ?: System.getenv("KEY_ALIAS") ?: ""
+                keyPassword = localProps.getProperty("KEY_PASSWORD") ?: System.getenv("KEY_PASSWORD") ?: ""
+            }
         }
     }
 
@@ -33,7 +45,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName("release")
         }
         debug {
             isDebuggable = true
