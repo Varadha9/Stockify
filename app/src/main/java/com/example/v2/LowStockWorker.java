@@ -54,10 +54,12 @@ public class LowStockWorker extends Worker {
         PendingIntent mainPi = PendingIntent.getActivity(ctx, 0, mainIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        Intent editIntent = new Intent(ctx, EditItemActivity.class);
-        editIntent.putExtra("item_id", lowItems.get(0).getId());
-        editIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent editPi = PendingIntent.getActivity(ctx, 1, editIntent,
+        // Open inventory (low-stock sorted) — not just one item
+        Intent stockIntent = new Intent(ctx, MainActivity.class);
+        stockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        stockIntent.putExtra("open_tab", "inventory");
+        stockIntent.putExtra("sort_low_stock", true);
+        PendingIntent stockPi = PendingIntent.getActivity(ctx, 1, stockIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx, CHANNEL_ID)
@@ -68,7 +70,7 @@ public class LowStockWorker extends Worker {
                         lowItems.size() + " item(s) are running low: " + names))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(mainPi)
-                .addAction(R.drawable.ic_add, "Update Stock", editPi)
+                .addAction(R.drawable.ic_inventory, "View Low Stock", stockPi)
                 .setAutoCancel(true);
 
         NotificationManager nm = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
