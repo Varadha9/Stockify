@@ -51,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav.setSelectedItemId(R.id.nav_dashboard);
         requestNotificationPermissionIfNeeded();
+
+        // Handle notification tap: open inventory sorted by low stock
+        if (getIntent().getBooleanExtra("sort_low_stock", false)) {
+            inventoryFragment.preselectLowStockSort();
+            bottomNav.setSelectedItemId(R.id.nav_inventory);
+        }
     }
 
     @Override
