@@ -1,5 +1,10 @@
 # 📦 Stockify — Retail Inventory App
 
+[![Android CI](https://github.com/Varadha9/Stockify/actions/workflows/android.yml/badge.svg)](https://github.com/Varadha9/Stockify/actions/workflows/android.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Min SDK](https://img.shields.io/badge/Min%20SDK-24-green.svg)](https://developer.android.com/about/versions/nougat)
+[![Target SDK](https://img.shields.io/badge/Target%20SDK-35-brightgreen.svg)](https://developer.android.com/about/versions/15)
+
 > A modern, offline-first Android inventory management app built for small retail businesses. Track stock, scan barcodes, get low-stock alerts, and export reports — all from your phone.
 
 ---
@@ -256,12 +261,18 @@ com.journeyapps:zxing-android-embedded  4.3.0
 
 ## 📄 License
 
-This project is for personal and educational use. All rights reserved © Varadha9.
+This project is licensed under the [MIT License](LICENSE) © 2025 Varadha.
 
 ---
 
 ## 🙋 Author
 
-**Varadha** — [GitHub](https://github.com/Varadha9)
+**Varadha** — [GitHub](https://github.com/Varadha9) · [Email](mailto:varadmandhare924@gmail.com)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
 
 > Built with ❤️ for small retail businesses.
