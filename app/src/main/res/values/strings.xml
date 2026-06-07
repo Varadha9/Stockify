@@ -229,4 +229,68 @@
     <!-- Privacy policy -->
     <string name="privacy_policy_url">https://varadha9.github.io/stockify-privacy/</string>
     <string name="privacy_policy_label">Privacy Policy</string>
+
+    <!-- Hardcoded strings moved to resources -->
+    <string name="discard_changes_title">Discard changes?</string>
+    <string name="discard_changes_message">You have unsaved changes. Leave anyway?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep editing</string>
+    <string name="qty_prefix">Qty: %d</string>
+    <string name="error_price_negative">Price cannot be negative</string>
+    <string name="error_qty_negative">Quantity cannot be negative</string>
+    <string name="select_items_to_update">Select items to update</string>
+    <string name="no_app_for_csv">No app available to share CSV</string>
+    <string name="bulk_adjust_hint">Use 5 to add, \u2212;2 to subtract</string>
+    <string name="bulk_adjust_title">Adjust %d item(s)</string>
+    <string name="bulk_confirm_title">Confirm bulk adjust</string>
+    <string name="bulk_confirm_message">Apply %s to %d item(s)?</string>
+    <string name="enter_valid_number">Enter a valid number</string>
+    <string name="btn_bulk_cancel">Cancel</string>
+    <string name="btn_bulk_apply">Apply (%d)</string>
+
+    <!-- Account deletion — required by Google Play policy -->
+    <string name="btn_delete_account">Delete Account</string>
+    <string name="dialog_delete_account_title">Delete Account?</string>
+    <string name="dialog_delete_account_message">This will permanently erase all your inventory data, logs, and settings. This cannot be undone.</string>
+    <string name="account_deleted">Account deleted</string>
+
+    <!-- Settings change password hints -->
+    <string name="hint_current_password">Current password</string>
+    <string name="hint_new_password">New password (min 6 chars)</string>
+    <string name="hint_confirm_new_password">Confirm new password</string>
+    <string name="error_current_password_wrong">Current password is incorrect</string>
+    <string name="error_new_password_short">New password must be at least 6 characters</string>
+    <string name="error_passwords_no_match">Passwords do not match</string>
+
+    <!-- Notifications -->
+    <string name="notif_low_stock_title">Low Stock Alert — %d item(s)</string>
+    <string name="notif_low_stock_body">%d item(s) are running low: %s</string>
+    <string name="notif_action_view_low_stock">View Low Stock</string>
+    <string name="notif_channel_name">Low Stock Alerts</string>
+    <string name="notif_channel_desc">Alerts when items fall below their low stock threshold</string>
+
+    <!-- Misc UI strings -->
+    <string name="meta_no_sku_supplier">No SKU or supplier</string>
+    <string name="registration_successful">Registration successful!</string>
+    <string name="scan_prompt">Scan a barcode</string>
+    <string name="error_invalid_credentials">Invalid email or password</string>
+    <string name="report_no_data">No data available</string>
+    <string name="report_no_activity">No activity yet</string>
+    <string name="report_no_category_data">No category data</string>
+    <string name="report_no_stock_data">No stock data</string>
+
+    <!-- Reports empty state -->
+    <string name="reports_empty_title">No inventory data yet</string>
+    <string name="reports_empty_body">Add items to your inventory to see reports and analytics here.</string>
+
+    <string name="hint_cost_price">Cost Price (%s) (Optional)</string>
+    <string name="hint_reorder_qty">Reorder Quantity (Optional)</string>
+    <string name="hint_reorder_qty_helper">How many units to reorder when low</string>
+    <string name="label_cost_value_report">Cost Value</string>
+    <string name="label_distinct_items_report">Products</string>
+
+    <!-- Data Safety disclosure shown at registration -->
+    <string name="data_safety_title">Data &amp; Privacy</string>
+    <string name="data_safety_message">Stockify stores your name, email, and inventory data only on this device. No data is sent to any server. You can delete all data at any time from Settings → Delete Account.</string>
+    <string name="data_safety_ok">Got it</string>
 </resources>
