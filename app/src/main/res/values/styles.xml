@@ -1,61 +1,61 @@
 <resources>
 
     <!-- ── Shape appearances ── -->
-    <style name="ShapeAppearance.V2.Small" parent="ShapeAppearance.Material3.SmallComponent">
+    <style name="ShapeAppearance.Stockify.Small" parent="ShapeAppearance.Material3.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
-    <style name="ShapeAppearance.V2.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+    <style name="ShapeAppearance.Stockify.Medium" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">14dp</item>
     </style>
-    <style name="ShapeAppearance.V2.Large" parent="ShapeAppearance.Material3.LargeComponent">
+    <style name="ShapeAppearance.Stockify.Large" parent="ShapeAppearance.Material3.LargeComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
     </style>
-    <style name="ShapeAppearance.V2.Circle" parent="">
+    <style name="ShapeAppearance.Stockify.Circle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
     <!-- ── Text input — focused stroke uses brand primary ── -->
-    <style name="Widget.V2.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+    <style name="Widget.Stockify.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/brand_primary</item>
         <item name="boxStrokeWidth">1.5dp</item>
         <item name="boxStrokeWidthFocused">2dp</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.V2.Small</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Stockify.Small</item>
         <item name="hintTextColor">@color/brand_primary</item>
     </style>
 
     <!-- ── Buttons ── -->
-    <style name="Widget.V2.Button.Primary" parent="Widget.Material3.Button">
+    <style name="Widget.Stockify.Button.Primary" parent="Widget.Material3.Button">
         <item name="android:minHeight">56dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:letterSpacing">0.01</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.V2.Medium</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Stockify.Medium</item>
         <item name="backgroundTint">@color/brand_primary</item>
     </style>
-    <style name="Widget.V2.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+    <style name="Widget.Stockify.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:minHeight">52dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.V2.Medium</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Stockify.Medium</item>
         <item name="strokeColor">@color/neutral_200</item>
     </style>
-    <style name="Widget.V2.Button.Danger" parent="Widget.Material3.Button">
+    <style name="Widget.Stockify.Button.Danger" parent="Widget.Material3.Button">
         <item name="android:minHeight">56dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.V2.Medium</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Stockify.Medium</item>
         <item name="backgroundTint">@color/color_error</item>
     </style>
 
     <!-- ── Cards ── -->
-    <style name="Widget.V2.Card" parent="Widget.Material3.CardView.Elevated">
+    <style name="Widget.Stockify.Card" parent="Widget.Material3.CardView.Elevated">
         <item name="cardElevation">0dp</item>
         <item name="cardCornerRadius">20dp</item>
         <item name="cardBackgroundColor">@color/surface_white</item>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.V2" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Stockify" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Brand colors -->
         <item name="colorPrimary">@color/brand_primary</item>
         <item name="colorOnPrimary">@color/text_on_primary</item>

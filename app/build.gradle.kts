@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.v2"
+    namespace = "com.stockify.inventory"
     compileSdk = 35
 
     defaultConfig {
@@ -55,6 +55,15 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    defaultConfig {
+        // Tell Room where to write schema JSON files for migration verification
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas"
+            }
+        }
     }
 
     packaging {

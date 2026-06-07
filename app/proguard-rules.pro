@@ -11,10 +11,10 @@
 }
 
 # ── App model / DAO classes ───────────────────────────────────────────────────
--keep class com.example.v2.InventoryItem { *; }
--keep class com.example.v2.StockLog { *; }
--keep class com.example.v2.ValueSnapshot { *; }
--keep class com.example.v2.InventoryBackupManager$BackupData { *; }
+-keep class com.stockify.inventory.InventoryItem { *; }
+-keep class com.stockify.inventory.StockLog { *; }
+-keep class com.stockify.inventory.ValueSnapshot { *; }
+-keep class com.stockify.inventory.InventoryBackupManager$BackupData { *; }
 
 # ── ZXing barcode scanner ─────────────────────────────────────────────────────
 -keep class com.google.zxing.** { *; }
