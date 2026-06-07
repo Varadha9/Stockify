@@ -35,7 +35,7 @@
                     android:id="@+id/txt_greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Good Morning"
+                    android:text="@string/greeting_morning"
                     android:textColor="#C4BFFF"
                     android:textSize="13sp"/>
 
@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Dashboard"
+                    android:text="@string/title_dashboard"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     android:textStyle="bold"/>
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Items in stock"
+                        android:text="@string/label_items_in_stock"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -157,7 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Total value"
+                        android:text="@string/label_total_value"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -200,7 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Low stock"
+                        android:text="@string/label_low_stock"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -243,7 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Distinct items"
+                        android:text="@string/label_distinct_items"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -263,7 +263,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Quick Actions"
+                android:text="@string/quick_actions"
                 android:textColor="@color/text_heading"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -299,7 +299,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Scan"
+                    android:text="@string/action_scan_short"
                     android:textColor="@color/text_heading"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
@@ -328,7 +328,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Inventory"
+                    android:text="@string/inventory_title"
                     android:textColor="@color/text_heading"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
@@ -356,7 +356,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Delete"
+                    android:text="@string/action_delete_short"
                     android:textColor="@color/text_heading"
                     android:textSize="12sp"
                     android:textStyle="bold"/>
@@ -407,7 +407,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Recent items"
+                android:text="@string/recent_items"
                 android:textColor="@color/text_heading"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -418,7 +418,7 @@
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:paddingStart="8dp"
-                android:text="View all →"
+                android:text="@string/view_all"
                 android:textColor="@color/brand_primary"
                 android:textSize="13sp"/>
         </LinearLayout>
@@ -442,7 +442,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:padding="32dp"
-            android:text="No items yet — add your first one!"
+            android:text="@string/empty_recent_activity"
             android:textColor="@color/text_hint"
             android:textSize="14sp"
             android:visibility="gone"/>

@@ -40,7 +40,7 @@
                 android:id="@+id/txt_welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome!"
+                android:text="@string/welcome_generic"
                 android:textColor="@color/text_heading"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Manage your inventory efficiently"
+                android:text="@string/manage_subtitle"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"/>
 
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Quick Actions"
+                android:text="@string/quick_actions"
                 android:textColor="@color/text_heading"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -104,7 +104,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Add Item"
+                            android:text="@string/action_add_item"
                             android:textColor="@color/text_heading"
                             android:textSize="13sp"
                             android:textStyle="bold"/>
@@ -143,7 +143,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Inventory"
+                            android:text="@string/action_view_inventory"
                             android:textColor="@color/text_heading"
                             android:textSize="13sp"
                             android:textStyle="bold"/>
@@ -190,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Scan Item"
+                            android:text="@string/action_scan_item"
                             android:textColor="@color/text_heading"
                             android:textSize="13sp"
                             android:textStyle="bold"/>
@@ -229,7 +229,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Delete Item"
+                            android:text="@string/action_delete_item"
                             android:textColor="@color/text_heading"
                             android:textSize="13sp"
                             android:textStyle="bold"/>
@@ -242,7 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="Inventory Stats"
+                android:text="@string/inventory_stats"
                 android:textColor="@color/text_heading"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -281,7 +281,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ITEMS IN STOCK"
+                            android:text="@string/label_items_in_stock_upper"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp"
                             android:textStyle="bold"
@@ -334,7 +334,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="LOW STOCK"
+                            android:text="@string/label_low_stock_upper"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp"
                             android:textStyle="bold"
@@ -379,7 +379,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="TOTAL VALUE"
+                            android:text="@string/label_total_value_upper"
                             android:textColor="@color/text_secondary"
                             android:textSize="11sp"
                             android:textStyle="bold"
@@ -404,7 +404,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="Recent Activity"
+                android:text="@string/recent_activity"
                 android:textColor="@color/text_heading"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -423,7 +423,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:padding="24dp"
-                android:text="No recent activity"
+                android:text="@string/no_recent_activity"
                 android:textColor="@color/text_hint"
                 android:textSize="14sp"
                 android:visibility="gone"/>

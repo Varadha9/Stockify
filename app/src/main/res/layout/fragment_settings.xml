@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Settings"
+                android:text="@string/settings_title"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="Account, data, and preferences"
+                android:text="@string/settings_subtitle"
                 android:textColor="#C4BFFF"
                 android:textSize="13sp"/>
         </LinearLayout>
@@ -66,7 +66,7 @@
                         android:id="@+id/txt_avatar_initial"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="U"
+                        android:text="@string/placeholder_avatar"
                         android:textColor="#FFFFFF"
                         android:textSize="22sp"
                         android:textStyle="bold"/>
@@ -83,7 +83,7 @@
                         android:id="@+id/txt_settings_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="User"
+                        android:text="@string/placeholder_user"
                         android:textColor="@color/text_heading"
                         android:textSize="17sp"
                         android:textStyle="bold"/>
@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="user@email.com"
+                        android:text="@string/placeholder_email"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"/>
                 </LinearLayout>
@@ -107,7 +107,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:text="PREFERENCES"
+            android:text="@string/section_preferences"
             android:textColor="@color/text_hint"
             android:textSize="11sp"
             android:textStyle="bold"
@@ -155,7 +155,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:text="DATA"
+            android:text="@string/section_data"
             android:textColor="@color/text_hint"
             android:textSize="11sp"
             android:textStyle="bold"
@@ -203,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Export CSV"
+                        android:text="@string/btn_export_csv"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"/>
                     <ImageView
@@ -248,7 +248,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Backup JSON"
+                        android:text="@string/btn_backup_json"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"/>
                     <ImageView
@@ -293,7 +293,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Restore JSON"
+                        android:text="@string/btn_restore_json"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"/>
                     <ImageView
@@ -313,7 +313,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:text="ACCOUNT"
+            android:text="@string/section_account"
             android:textColor="@color/text_hint"
             android:textSize="11sp"
             android:textStyle="bold"
@@ -361,7 +361,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Change Password"
+                        android:text="@string/btn_change_password"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"/>
                     <ImageView
@@ -406,7 +406,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Privacy Policy"
+                        android:text="@string/privacy_policy_label"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"/>
                     <ImageView
@@ -419,7 +419,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- ── Sign Out — isolated, visually distinct destructive action ── -->
+        <!-- ── Sign Out ── -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -457,7 +457,59 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Sign Out"
+                    android:text="@string/btn_sign_out"
+                    android:textColor="@color/color_error"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/color_error"
+                    android:rotation="180"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── Delete Account — required by Google Play policy ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/color_error_bg">
+
+            <LinearLayout
+                android:id="@+id/btn_delete_account"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_icon_circle_error"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_delete"
+                        app:tint="#FFFFFF"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/btn_delete_account"
                     android:textColor="@color/color_error"
                     android:textSize="15sp"
                     android:textStyle="bold"/>

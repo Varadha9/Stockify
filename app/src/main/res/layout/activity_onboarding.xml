@@ -21,7 +21,7 @@
             android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="Skip"
+            android:text="@string/btn_skip"
             android:textColor="@color/text_secondary"
             android:textSize="15sp"/>
     </LinearLayout>
@@ -60,7 +60,7 @@
             android:insetBottom="0dp"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:text="Next"
+            android:text="@string/btn_next"
             android:textSize="15sp"
             android:textStyle="bold"
             app:backgroundTint="@color/brand_primary"

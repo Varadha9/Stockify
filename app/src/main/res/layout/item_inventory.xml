@@ -38,7 +38,7 @@
                 android:id="@+id/txt_item_initial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="A"
+                android:text="@string/placeholder_initial"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Product Name"
+                android:text="@string/placeholder_product_name"
                 android:textColor="@color/text_heading"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
@@ -80,7 +80,7 @@
                     android:paddingTop="3dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="3dp"
-                    android:text="Category"
+                    android:text="@string/placeholder_category"
                     android:textColor="@color/brand_primary"
                     android:textSize="10sp"
                     android:textStyle="bold"/>
@@ -95,7 +95,7 @@
                     android:paddingTop="3dp"
                     android:paddingEnd="8dp"
                     android:paddingBottom="3dp"
-                    android:text="Low Stock"
+                    android:text="@string/label_low_stock_badge"
                     android:textColor="@color/color_error"
                     android:textSize="10sp"
                     android:textStyle="bold"
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="SKU"
+                    android:text="@string/placeholder_sku"
                     android:textColor="@color/text_hint"
                     android:textSize="11sp"/>
 
@@ -132,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Qty: 0"
+                    android:text="@string/placeholder_qty"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp"/>
             </LinearLayout>
@@ -158,7 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Edit →"
+                android:text="@string/label_edit_arrow"
                 android:textColor="@color/brand_primary"
                 android:textSize="11sp"/>
         </LinearLayout>

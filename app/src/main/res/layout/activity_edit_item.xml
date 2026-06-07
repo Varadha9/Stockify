@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Edit Item"
+            android:text="@string/edit_item_title"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -46,7 +46,7 @@
             android:insetBottom="0dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="Delete"
+            android:text="@string/btn_delete"
             android:textColor="#FF5370"
             android:textSize="13sp"
             app:cornerRadius="12dp"
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Tap to change photo"
+                        android:text="@string/tap_to_change_photo"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"/>
                 </LinearLayout>
@@ -131,7 +131,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CURRENT STOCK"
+                            android:text="@string/label_current_stock"
                             android:textColor="@color/brand_primary"
                             android:textSize="11sp"
                             android:textStyle="bold"
@@ -148,7 +148,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="units"
+                            android:text="@string/label_units"
                             android:textColor="@color/text_secondary"
                             android:textSize="13sp"/>
                     </LinearLayout>
@@ -176,7 +176,7 @@
                             android:layout_width="56dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="qty"
+                            android:text="@string/label_qty"
                             android:textColor="@color/text_hint"
                             android:textSize="11sp"/>
 
@@ -213,7 +213,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:text="IDENTITY"
+                        android:text="@string/section_identity"
                         android:textColor="@color/text_hint"
                         android:textSize="11sp"
                         android:textStyle="bold"
@@ -315,7 +315,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:text="PRICING &amp; ALERTS"
+                        android:text="@string/section_pricing_alerts"
                         android:textColor="@color/text_hint"
                         android:textSize="11sp"
                         android:textStyle="bold"
@@ -402,7 +402,7 @@
                 android:layout_marginBottom="8dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="Save Changes"
+                android:text="@string/btn_save_changes"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:backgroundTint="@color/brand_primary"

@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Welcome back"
+            android:text="@string/welcome_back_title"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Sign in to Stockify"
+            android:text="@string/sign_in_subtitle"
             android:textColor="#C4BFFF"
             android:textSize="15sp"/>
     </LinearLayout>

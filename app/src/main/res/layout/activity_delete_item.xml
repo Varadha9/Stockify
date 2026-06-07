@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Delete Item"
+            android:text="@string/delete_item_title"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                android:text="Tap an item to delete it. This action is permanent."
+                android:text="@string/delete_warning"
                 android:textColor="@color/color_error"
                 android:textSize="13sp"/>
         </LinearLayout>
@@ -110,7 +110,7 @@
         android:layout_margin="16dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:text="Cancel"
+        android:text="@string/btn_cancel"
         android:textSize="15sp"
         app:cornerRadius="16dp"
         app:strokeColor="@color/neutral_200"/>

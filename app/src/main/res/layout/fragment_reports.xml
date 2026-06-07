@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reports"
+                android:text="@string/reports_title"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold"/>
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="Insights into your inventory"
+                android:text="@string/reports_subtitle"
                 android:textColor="#C4BFFF"
                 android:textSize="13sp"/>
         </LinearLayout>
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="No inventory data yet"
+                android:text="@string/reports_empty_title"
                 android:textColor="@color/text_heading"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="Add items to your inventory to see reports and analytics here."
+                android:text="@string/reports_empty_body"
                 android:textColor="@color/text_secondary"
                 android:textSize="13sp"/>
         </LinearLayout>
@@ -108,7 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Total Units"
+                        android:text="@string/label_total_units"
                         android:textColor="@color/brand_primary"
                         android:textSize="11sp"
                         android:textStyle="bold"/>
@@ -143,7 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Low Stock"
+                        android:text="@string/label_low_stock_report"
                         android:textColor="@color/color_error"
                         android:textSize="11sp"
                         android:textStyle="bold"/>
@@ -179,7 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Total Value"
+                        android:text="@string/label_total_value_report"
                         android:textColor="@color/color_success"
                         android:textSize="11sp"
                         android:textStyle="bold"/>
@@ -220,7 +220,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Category Mix"
+                        android:text="@string/section_category_mix"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"
                         android:textStyle="bold"/>
@@ -273,7 +273,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Stock Levels"
+                        android:text="@string/section_stock_levels"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"
                         android:textStyle="bold"/>
@@ -319,7 +319,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="By Supplier"
+                        android:text="@string/section_by_supplier"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"
                         android:textStyle="bold"/>
@@ -366,7 +366,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Recent Activity"
+                        android:text="@string/section_recent_activity"
                         android:textColor="@color/text_heading"
                         android:textSize="15sp"
                         android:textStyle="bold"/>
